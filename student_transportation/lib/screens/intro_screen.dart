@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../shared/menu_drawer.dart';
+import 'package:student_transportation/shared/menu_drawer.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -7,50 +7,131 @@ class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Student Transportation')),
-        drawer: MenuDrawer(),
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/'),
-            fit: BoxFit.cover,
-          )),
-          child: Center(
-              child: Container(
-            padding: EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Colors.white70,
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade900,
+        title: Row(
+          children: [
+            const Icon(Icons.directions_bus, color: Colors.white),
+            const SizedBox(width: 8),
+            const Text(
+              'Student\nTransportation',
+              style: TextStyle(fontSize: 16),
             ),
-            child:
-                Text('Safe and Fast Ways.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 22,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 2.0,
-                          color: Colors.grey,
-                        )
-                      ],
-                    )),
-          )),
-        ));
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // TODO: Handle logout
+            },
+            child: const Text('Log Out', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+        toolbarHeight: 70,
+      ),
+      drawer: MenuDrawer(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              const SizedBox(height: 30),
+              // Add Student Button
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // TODO: Navigate to Add Student screen
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    '+ Add Student',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              // Students List
+              Expanded(
+                child: ListView(
+                  children: const [
+                    StudentTile(
+                      name: 'John Doe',
+                      school: 'Sunrise Public School',
+                      imagePath: 'assets/images/student1.jpg',
+                    ),
+                    StudentTile(
+                      name: 'Jane Smith',
+                      school: 'Sunrise Public School',
+                      imagePath: 'assets/images/student2.jpg',
+                    ),
+                    StudentTile(
+                      name: 'Emily Johnson',
+                      school: 'Sunrise Public School',
+                      imagePath: 'assets/images/student3.jpg',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
-class HelloYou extends StatefulWidget {
-  const HelloYou({Key? key}) : super(key: key);
+class StudentTile extends StatelessWidget {
+  final String name;
+  final String school;
+  final String imagePath;
 
-  @override
-  _HelloYouState createState() => _HelloYouState();
-}
+  const StudentTile({
+    Key? key,
+    required this.name,
+    required this.school,
+    required this.imagePath,
+  }) : super(key: key);
 
-class _HelloYouState extends State<HelloYou> {
   @override
   Widget build(BuildContext context) {
-    
-    return Container();
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundImage: AssetImage(imagePath),
+        ),
+        title: Text(
+          name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        subtitle: Text(
+          school,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+          ),
+        ),
+        onTap: () {
+          // TODO: Action when clicking student
+        },
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_transportation/screens/registerPage_screen.dart';
 import 'package:student_transportation/shared/menu_drawer.dart';
 
 class LoginPage extends StatelessWidget {
@@ -7,7 +8,28 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login Page')),
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade900,
+        title: Row(
+          children: [
+            const Icon(Icons.directions_bus, color: Colors.white),
+            const SizedBox(width: 8),
+            const Text(
+              'Student\nTransportation',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // TODO: Handle logout
+            },
+            child: const Text('Log Out', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+        toolbarHeight: 70,
+      ),
       drawer: MenuDrawer(),
       body: SafeArea(
         child: Center(
@@ -102,7 +124,14 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterPage(),
+                        ),
+                      );
+                    },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.blue),
                       shape: RoundedRectangleBorder(

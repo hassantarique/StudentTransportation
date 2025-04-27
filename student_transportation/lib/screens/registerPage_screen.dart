@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_transportation/screens/phoneVerification_screen.dart';
 import 'package:student_transportation/shared/menu_drawer.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -7,7 +8,28 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register Details')),
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade900,
+        title: Row(
+          children: [
+            const Icon(Icons.directions_bus, color: Colors.white),
+            const SizedBox(width: 8),
+            const Text(
+              'Student\nTransportation',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // TODO: Handle logout
+            },
+            child: const Text('Log Out', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+        toolbarHeight: 70,
+      ),
       drawer: MenuDrawer(),
       body: SafeArea(
         child: Center(
@@ -32,10 +54,7 @@ class RegisterPage extends StatelessWidget {
                 const Text(
                   'Student\nTransportation',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 30),
 
@@ -96,7 +115,14 @@ class RegisterPage extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PhoneVerificationScreen(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
                             shape: RoundedRectangleBorder(
