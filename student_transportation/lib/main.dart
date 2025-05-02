@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_transportation/screens/intro_screen.dart';
+import 'package:student_transportation/screens/login_screen.dart';
 
 void main() {
   runApp(TransportationApp());
@@ -12,7 +12,7 @@ class TransportationApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: IntroScreen(),
+      home: LoginPage(),
     );
   }
 }

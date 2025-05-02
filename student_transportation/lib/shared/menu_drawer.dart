@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:student_transportation/screens/intro_screen.dart';
 import 'package:student_transportation/screens/login_screen.dart';
 import 'package:student_transportation/screens/map_screen.dart';
-import 'package:student_transportation/screens/registerPage_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class MenuDrawer extends StatelessWidget {
   }
 
   List<Widget> buildMenuItems(BuildContext context) {
-    final List<String> menuTitles = ['Home', 'Login Page', 'Register', 'Map'];
+    final List<String> menuTitles = ['Home', 'Map'];
     List<Widget> menuItems = [];
     menuItems.add(
       DrawerHeader(
@@ -24,37 +23,34 @@ class MenuDrawer extends StatelessWidget {
         ),
       ),
     );
-    menuTitles.forEach((element) {
-      Widget screen = Container();
+
+    for (var title in menuTitles) {
+      Widget screen;
+      switch (title) {
+        case 'Home':
+          screen = const IntroScreen();
+          break;
+        case 'Map':
+          screen = const MapScreen();
+          break;
+        default:
+          screen = const LoginPage();
+      }
+
       menuItems.add(
         ListTile(
-          title: Text(element, style: TextStyle(fontSize: 18)),
+          title: Text(title, style: TextStyle(fontSize: 18)),
           onTap: () {
-            switch (element) {
-              case 'Home Page':
-                screen = IntroScreen();
-                break;
-              case 'Login Page':
-                screen = LoginPage();
-                break;
-              case 'Register':
-                screen = RegisterPage();
-                break;
-              case 'Map':
-                screen = MapScreen();
-                break;
-              default:
-                screen = IntroScreen();
-                break;
-            }
-            Navigator.of(context).pop();
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => screen));
+            Navigator.of(context).pop(); // Close the drawer
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => screen),
+              (route) => route.isFirst || title == 'Home',
+            );
           },
         ),
       );
-    });
+    }
+
     return menuItems;
   }
 }

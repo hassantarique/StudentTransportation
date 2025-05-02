@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_transportation/screens/intro_screen.dart';
 import 'package:student_transportation/shared/menu_drawer.dart';
 
 class PhoneVerificationScreen extends StatelessWidget {
@@ -144,8 +145,13 @@ class PhoneVerificationScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Verify OTP logic here
-                  },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const IntroScreen(),
+                        ),
+                      );
+                    },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
